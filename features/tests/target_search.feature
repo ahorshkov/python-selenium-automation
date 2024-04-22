@@ -11,6 +11,7 @@ Feature: Search tests
     Given Open target.com
     When Search for <item>
     Then Verify search results are shown for <expected_item>
+    Then Verify search results display product name and product image
     Examples:
     |item        |expected_item   |
     |coffee      |coffee          |

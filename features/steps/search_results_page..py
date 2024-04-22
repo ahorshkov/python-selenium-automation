@@ -8,8 +8,13 @@ ADD_TO_CART_BTN1 = (By.CSS_SELECTOR, '#addToCartButtonOrTextIdFor82394015')
 ADD_TO_CART_BTN2 = (By.CSS_SELECTOR, 'button[data-test="shippingButton"]')
 VIEW_CART_BTN = (By.CSS_SELECTOR, 'a[href="/cart"]')
 ITEMS_IN_CART = (By.CSS_SELECTOR, 'span[class*=CartSummary]')
+PRODUCT_TITLE = (By.CSS_SELECTOR, 'a[data-test="product-title"][href*="A-"]')
+PRODUCT_IMAGE = (By.CSS_SELECTOR, 'picture[data-test*="ProductCardImage"]')
 
-
+@given('Open target.com')
+def open_circle_page(context):
+    context.driver.get('https://www.target.com/')
+    sleep(5)
 @then("Verify search results are shown for {expected_item}")
 def verify_search_results(context, expected_item):
     actual_text = context.driver.find_element(*SEARCH_RESULTS_HEADER).text
@@ -27,3 +32,12 @@ def add_to_cart(context):
 @then('Verify {item} is in the cart')
 def verify_item(context, item):
     context.driver.find_element(*ITEMS_IN_CART)
+
+@then('Verify search results display product name and product image')
+def verify_search_results(context):
+    titles = context.driver.find_elements(*PRODUCT_TITLE)
+    images = context.driver.find_elements(*PRODUCT_IMAGE)
+    print(len(titles))
+    print(len(images))
+
+assert len(titles) == len(images)
