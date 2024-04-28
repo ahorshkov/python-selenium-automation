@@ -26,3 +26,27 @@ def click_sign_in_with_password(context):
 @then('Verify user is logged in')
 def verify_user_is_logged_in(context):
     context.app.sign_in_page.verify_user_is_logged_in()
+
+@when('Store original window')
+def store_original_window(context):
+    context.original_window = context.app.sign_in_page.get_current_window()
+
+
+@when('Click on Target terms and conditions link')
+def click_tc_link(context):
+    context.app.sign_in_page.click_tc_link()
+
+
+@when('Switch to the newly opened window')
+def switch_to_new_window(context):
+    context.app.sign_in_page.switch_to_new_window()
+
+
+@then('Verify Terms and Conditions page is opened')
+def verify_tc_page_opened(context):
+    context.app.sign_in_page.verify_tc_page()
+
+
+@then('User can close new window and switch back to original')
+def return_to_original_window(context):
+    context.app.sign_in_page.switch_window_by_id(context.original_window)
