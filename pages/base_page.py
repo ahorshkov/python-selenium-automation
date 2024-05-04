@@ -1,6 +1,10 @@
 from selenium.webdriver.support import expected_conditions as EC, expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium import webdriver
+from selenium.webdriver import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+
 class Page:
 
     def __init__(self, driver):
@@ -53,6 +57,10 @@ class Page:
     def switch_window_by_id(self, window_id):
         print('Switching to ...', window_id)
         self.driver.switch_to.window(window_id)
+
+    def scroll_to_bottom(self):
+        body = self.driver.find_element(By.TAG_NAME, 'body')
+        body.send_keys(Keys.END)
 
     def verify_item_disappear(self, *locator):
         self.wait.until(EC.invisibility_of_element(locator))

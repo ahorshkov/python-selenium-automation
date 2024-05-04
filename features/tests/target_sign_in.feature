@@ -11,6 +11,14 @@ Feature: Sign In
     When Enter valid andrii.horshkov@gmail.com and Andrey380192!
     When Click Sign in with password
     Then Verify user is logged in
+
+  Scenario: Verify that user can not login with invalid credentials
+    Given Open target.com
+    When Click Sign In
+    When Enter invalid bla@blabla.com and 333blabla333
+    When Click Sign in with password
+    Then Verify user isn't logged in
+    
   Scenario: User can open and close Terms and Conditions from sign in page
     Given Open target.com
     When Click Sign In

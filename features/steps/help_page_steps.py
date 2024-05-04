@@ -11,11 +11,18 @@ AREA_2 = (By.CSS_SELECTOR, '.grid_4')
 TITLE_ALL_HELP_PAGES = (By.XPATH, '//h2[text()="Browse all Help pages"]')
 
 
-@given('Open Help page')
-def open_circle_page(context):
-    context.driver.get('https://help.target.com/help')
-    sleep(7)
+@given('Open Help page for Returns')
+def open_help_returns(context):
+    context.app.help_page.open_help_returns()
 
+
+@when('Select Help topic {option}')
+def select_topic(context, option):
+    context.app.help_page.select_topic(option)
+
+@then('Verify {header} page opened')
+def verify_help_page_header(context, header):
+    context.app.help_page.verify_header(header)
 
 @then("Title 'Target Help' is shown")
 def find_target_help_title(context):
@@ -26,6 +33,11 @@ def find_target_help_title(context):
 def find_search_field(context):
     context.driver.find_element(*SEARCH_FIELD)
 
+
+@given('Open Help page')
+def open_circle_page(context):
+    context.driver.get('https://help.target.com/help')
+    sleep(7)
 
 @then('Search button is shown')
 def find_search_button(context):

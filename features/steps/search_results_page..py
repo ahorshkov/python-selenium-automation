@@ -13,6 +13,16 @@ LISTINGS = (By.CSS_SELECTOR, 'div[data-test*="ProductCardWrapper"]')
 PRODUCT_TITLE = (By.CSS_SELECTOR, 'a[data-test="product-title"]')
 PRODUCT_IMAGE = (By.CSS_SELECTOR, 'picture[data-test*="ProductCardImage"]')
 
+
+@when('Hover favorites icon')
+def hover_fav_icon(context):
+    context.app.search_results_page.hover_fav_icon()
+
+
+@then('Favorites tooltip is shown')
+def verify_fav_tooltip(context):
+    context.app.search_results_page.verify_fav_tooltip()
+
 #@given('Open target.com')
 #def open_circle_page(context):
  #   context.driver.get('https://www.target.com/')
